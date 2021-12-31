@@ -37,7 +37,7 @@ async function onVoiceStateUpdate(oldState, newState) {
                         .setTitle(oldState.member.displayName + "が" + oldState.channel.name + "から退室しました！")
                         .setAuthor("VC退室", oldState.member.displayAvatarURL())
                         .setDescription("現在の参加者数は" + String(oldState.channel.members.size) + "人です。")
-                        .setFooter('Version2.0')
+                        .setFooter('Version' + version)
                     oldState.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
                 }
             });
