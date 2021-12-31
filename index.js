@@ -8,7 +8,7 @@ const send_vc_notify = (voicestate, title) => {
     const displayName = voicestate.member.displayName;
     const ChannelName = voicestate.channel.name;
     const displayAvatarURL = voicestate.member.displayAvatarURL();
-    const ChannelMemberSize = voicestate.members.size;
+    const ChannelMemberSize = voicestate.channel.members.size;
     const Embed = new MessageEmbed()
         .setColor(displayColor)
         .setTitle(displayName + "が" + ChannelName + "に入室しました！")
