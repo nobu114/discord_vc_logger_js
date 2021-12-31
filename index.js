@@ -2,7 +2,7 @@ const { Client, Intents, MessageEmbed } = require('discord.js')
 const client = new Client({ intents: Object.keys(Intents.FLAGS) })
 
 client.once('ready', () => {
-    console.log(`ログインしました。`)
+    console.log('ログインしました。');
 })
 
 client.on('voiceStateUpdate', async (oldState, newState) => await onVoiceStateUpdate(oldState, newState))
@@ -10,18 +10,21 @@ client.on('voiceStateUpdate', async (oldState, newState) => await onVoiceStateUp
 async function onVoiceStateUpdate(oldState, newState) {
     if (newState && oldState) {
         if (oldState.channelId === null && newState.channelId != null) {
-            const roles = newState.member.roles.cache
-            roles.map((role) => {
-                if (role.name == "VC Entry") {
-                    const Embed = new MessageEmbed()
-                        .setColor(newState.member.displayColor)
-                        .setTitle(newState.member.displayName + "が" + newState.channel.name + "に入室しました！")
-                        .setAuthor("VC入室", newState.member.displayAvatarURL())
-                        .setDescription("現在の参加者数は" + String(newState.channel.members.size) + "人です。")
-                        .setFooter('Version2.0')
-                    newState.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
-                }
-            });
+            const roles = newState.member.roles.cache;
+            const is_bot = newState.member.user.bot;
+            if (!is_bot) {
+                roles.map((role) => {
+                    if (role.name == "VC Entry") {
+                        const Embed = new MessageEmbed()
+                            .setColor(newState.member.displayColor)
+                            .setTitle(newState.member.displayName + "が" + newState.channel.name + "に入室しました！")
+                            .setAuthor("VC入室", newState.member.displayAvatarURL())
+                            .setDescription("現在の参加者数は" + String(newState.channel.members.size) + "人です。")
+                            .setFooter('Version2.0')
+                        newState.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
+                    }
+                });
+            }
             console.log(newState.member)
             // .map((member) => {
             //     const role = member.roles.cache
