@@ -10,7 +10,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => await onVoiceStateUp
 async function onVoiceStateUpdate(oldState, newState) {
     if (newState && oldState) {
         if (oldState.channelId === null && newState.channelId != null) {
-            console.log(newState.membe)
+            console.log(newState.member)
             // .map((member) => {
             //     const role = member.roles.cache
             //     console.log(role.name)
