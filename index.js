@@ -28,19 +28,22 @@ async function onVoiceStateUpdate(oldState, newState) {
                 });
             }
         }
-
-        if (oldState.channelId != null && newState.channelId === null) {
-            oldState.member.roles.cache.map(function (role) {
-                if (role.name == "VC Exit") {
-                    const Embed = new MessageEmbed()
+        else if (oldState.channelId != null && newState.channelId === null) {
+            const roles = oldState.member.roles.cache;
+            const is_bot = oldState.member.user.bot;
+            if (!is_bot) {
+                roles.map((role) =>{
+                    if (role.name == "VC Exit"){
+                        const Embed = new MessageEmbed()
                         .setColor(oldState.member.displayColor)
                         .setTitle(oldState.member.displayName + "が" + oldState.channel.name + "から退室しました！")
                         .setAuthor("VC退室", oldState.member.displayAvatarURL())
                         .setDescription("現在の参加者数は" + String(oldState.channel.members.size) + "人です。")
                         .setFooter('Version' + version)
-                    oldState.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
-                }
-            });
+                        oldState.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
+                    }
+                });
+            }
         }
     }
 
