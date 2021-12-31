@@ -10,10 +10,11 @@ client.on('voiceStateUpdate', async (oldState, newState) => await onVoiceStateUp
 async function onVoiceStateUpdate(oldState, newState) {
     if (newState && oldState) {
         if (oldState.channelId === null && newState.channelId != null) {
-            newState.member.map((member) => {
-                const role = member.roles.cache
-                console.log(role.name)
-            });
+            console.log(newState.membe)
+            // .map((member) => {
+            //     const role = member.roles.cache
+            //     console.log(role.name)
+            // });
             // .roles.cache.map(function (role) {
             //     if (role.name == "VC Entry") {
             //         const Embed = new MessageEmbed()
