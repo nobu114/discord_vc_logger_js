@@ -11,8 +11,8 @@ const send_vc_notify = (voicestate, title) => {
     const ChannelMemberSize = voicestate.channel.members.size;
     const Embed = new MessageEmbed()
         .setColor(displayColor)
-        .setTitle(displayName + "が" + ChannelName + "に入室しました！")
-        .setAuthor(title, displayAvatarURL)
+        .setTitle(displayName + "が" + ChannelName + "に" + title + "しました！")
+        .setAuthor("VC" + title, displayAvatarURL)
         .setDescription("現在の参加者数は" + String(ChannelMemberSize) + "人です。")
         .setFooter('Version' + version)
     voicestate.guild.systemChannel.send({ embeds: [Embed] }).catch(console.error);
@@ -30,7 +30,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
             if (!is_bot) {
                 roles.map((role) => {
                     if (role.name == "VC Entry") {
-                        send_vc_notify(newState, "VC入室");
+                        send_vc_notify(newState, "入室");
                     }
                 });
             }
@@ -41,7 +41,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
             if (!is_bot) {
                 roles.map((role) => {
                     if (role.name == "VC Exit") {
-                        send_vc_notify(oldState, "VC退室");
+                        send_vc_notify(oldState, "退室");
                     }
                 });
             }
