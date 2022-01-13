@@ -1,7 +1,7 @@
 const { Client, Intents, MessageEmbed } = require('discord.js')
 const client = new Client({ intents: Object.keys(Intents.FLAGS) })
 
-const version = '2.1';
+const version = '2.2';
 
 const send_vc_notify = (voicestate, title) => {
     const displayColor = voicestate.member.displayColor;
